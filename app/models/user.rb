@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :captures
 
+  before_save :ensure_authentication_token
+
   def safe_name
   	if name.nil? || name.empty? 
   		email
@@ -17,4 +19,18 @@ class User < ActiveRecord::Base
   		end
   	end
   end
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
+  def generate_authentication_token
+    loop do 
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
+
 end

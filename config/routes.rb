@@ -12,6 +12,7 @@ Pokemon::Application.routes.draw do
   post "pages/result" => "pages#result", as: :search_result
   get "pages/random" => "pages#random", as: :random_result
   
+  post "user/session_for_mobile" => "user#session_for_mobile", as: :session_for_mobile  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
