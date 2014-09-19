@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+
+  before_filter :authenticate_user!, except: [:result, :random]
   def index
   end
 
