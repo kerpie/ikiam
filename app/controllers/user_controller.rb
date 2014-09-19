@@ -9,7 +9,7 @@ class UserController < ApplicationController
 				return render json: { status: false, message: "Usuario o contraseña incorrectos" }
 			end
 			if user.valid_password?(password)
-				return render json: { status: true, token: user.session_token }
+				return render json: { status: true, token: user.authentication_token }
 			else
 				return render json: { status: false, message: "Usuario o contraseña incorrectos" }
 			end
