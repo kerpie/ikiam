@@ -1,0 +1,32 @@
+.container-fluid
+	.row
+		.col-sm-12
+			.page-header
+				%h1
+					Registrar nueva captura
+
+	= render 'form'
+
+- content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			map = new GMaps({
+				div: '#map-for-capture',
+				lat: -0.216667,
+				lng: -78.516667,
+				zoom: 12
+			});
+
+			marker = map.createMarker({
+				lat: -0.216667,
+				lng: -78.516667,
+				draggable: true,
+
+				dragend: function(e){
+					$("#capture_latitude").val(e.latLng.lat());
+					$("#capture_longitude").val(e.latLng.lng());
+				}
+			});
+
+			map.addMarker(marker);
+		});

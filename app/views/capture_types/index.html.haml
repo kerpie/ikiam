@@ -1,0 +1,17 @@
+%h1 Listing capture_types
+
+%table
+  %tr
+    %th Name
+    %th{colspan: 2}
+      Options
+
+  - @capture_types.each do |capture_type|
+    %tr
+      %td= capture_type.name
+      %td= link_to 'Edit', edit_capture_type_path(capture_type)
+      %td= link_to 'Destroy', capture_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Capture type', new_capture_type_path

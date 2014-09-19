@@ -1,0 +1,62 @@
+= form_for @capture, html: { multipart: true, role: "form", class: "form-horizontal"} do |f|
+  - if @capture.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@capture.errors.count, "error")} prohibited this capture from being saved:"
+      %ul
+        - @capture.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label :altitude, "Altitud: ", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :altitude, class: "form-control", placeholder: "Ingrese la altitud"
+  .form-group
+    = f.label :latitude, "Latitud: ", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :latitude, class: "form-control", placeholder: "Ingrese la latitud"
+  .form-group
+    = f.label :longitude, "Longitud:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :longitude, class: "form-control", placeholder: "Ingrese la longitud"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      #map-for-capture
+  .form-group
+    = f.label :temperature, "Temperatura:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :temperature, class: "form-control", placeholder: "Ingrese la temperatura en grados celsius"
+  .form-group
+    = f.label :humidity, "Humedad:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :humidity, class: "form-control", placeholder: "Ingrese la humedad"
+  .form-group
+    = f.label :description, "Descripción:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :description, class: "form-control", placeholder: "Ingrese la descripción"
+  .form-group
+    = f.label :environment_description, "Descripción del ambiente:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :environment_description, class: "form-control", placeholder: "Ingrese la descripción del ambiente donde fue tomada la foto"
+  .form-group
+    = f.label :time, "Hora", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.time_select :time, class: "form-control"
+  = f.hidden_field :user_id, value: current_user.id
+  .form-group
+    = f.label :season_id, "Estación:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.collection_select :season_id, Season.all, :id, :name, {}, class: "form-control", prompt: "Elija una opción"
+  .form-group
+    = f.label :region_id, "Región:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.collection_select :region_id, Region.all, :id, :name, {}, class: "form-control", prompt: "-- Elija una opción --"
+  .form-group
+    = f.label :capture_type_id, "Tipo de captura:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.collection_select :capture_type_id, CaptureType.all, :id, :name, {}, class: "form-control", prompt: "-- Elija una opción --"
+  .form-group
+    = f.label :image, "Imagen:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.file_field :image, class: "form-control"
+  .form-group
+    .col-sm-4.col-sm-offset-2
+      = f.submit 'Guardar', class: "form-control"

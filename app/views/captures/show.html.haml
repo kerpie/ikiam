@@ -1,0 +1,96 @@
+.container-fluid
+  .row
+    .col-sm-12
+      .page-header
+        %h1
+          Captura hecha por
+          = @capture.user.safe_name
+          %small
+            (Bonita ¿no?)
+
+  - if notice
+    .alert.alert-success{:role => "alert"}
+      %strong
+        = notice
+
+  .row
+    .col-sm-12
+      .jumbotron
+        .container
+          = image_tag @capture.image.url, class: "img-thumbnail"
+    .col-sm-12
+      .panel.panel-default  
+        .panel-heading
+          %h3.panel-title
+            Descripción de la imagen
+        .panel-body
+          %p
+            = @capture.description
+    .col-sm-12
+      .panel.panel-default  
+        .panel-heading
+          %h3.panel-title
+            Descripción del ambiente 
+        .panel-body
+          %p
+            = @capture.environment_description
+    .col-sm-12
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title 
+            Ubicación y datos de la imagen
+        .panel-body
+          .col-sm-6
+            %ul.list-group
+              %li.list-group-item
+                Latitud: 
+                = @capture.latitude
+              %li.list-group-item 
+                Longitud
+                = @capture.longitude
+              %li.list-group-item 
+                Altitud:
+                = @capture.altitude
+              %li.list-group-item 
+                Temperatura:
+                = @capture.temperature
+              %li.list-group-item 
+                Humedad:
+                = @capture.humidity
+              %li.list-group-item 
+                Hora:
+                = @capture.time.in_time_zone
+              %li.list-group-item
+                Región:
+                = @capture.region.name
+              %li.list-group-item
+                Estación:
+                = @capture.season.name
+              %li.list-group-item
+                Tipo de Captura:
+                = @capture.capture_type.name
+          .col-sm-6
+            #map-in-capture{style: "height: 400px;"}
+    
+.row
+  .col-sm-4.col-sm-offset-4
+    .btn-group.btn-group-justified
+      - if @capture.user == current_user
+        = link_to 'Editar captura', edit_capture_path(@capture), class: "btn btn-default"
+      -else
+        = link_to 'Volver', captures_path, class: "btn btn-default"
+- content_for :ready_scripts do
+  :javascript
+    $(document).ready(function(){
+      map = new GMaps({
+        div: '#map-in-capture',
+        lat: #{@capture.latitude},
+        lng:  #{@capture.longitude},
+        zoom: 15
+      });
+
+      map.addMarker({
+        lat: #{@capture.latitude},
+        lng: #{@capture.longitude}
+      });
+    });

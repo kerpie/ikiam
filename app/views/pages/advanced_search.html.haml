@@ -1,0 +1,52 @@
+.container-fluid
+	.row
+		.col-sm-12
+			.page-header
+				%h1
+					Búsqueda avanzada
+
+	.row
+		.col-sm-offset-1.col-sm-10
+			.col-sm-5
+				= form_tag search_result_path, id: "advanced-search-form", role: "form", remote: true do 
+					= hidden_field_tag :search_type, 1
+					.form-group
+						= label_tag :latitude, "Latitud(máxima): "
+						= text_field_tag :latitude, "", class: "form-control", placeholder: "Para un rango, use dos puntos de separacion (XX:YY)", step: "any"
+					.form-group
+						= label_tag :longitude, "Longitud(máxima): "
+						= text_field_tag :longitude, "", class: "form-control", placeholder: "Para un rango, use dos puntos de separacion (XX:YY)", step: "any"
+					.form-group
+						= label_tag :altitude, "Altitud(máxima): "
+						= text_field_tag :altitude, "", class: "form-control", placeholder: "Para un rango, use dos puntos de separacion (XX:YY)", step: "any"
+					.form-group
+						= label_tag :temperature, "Temperatura(máxima): "
+						= text_field_tag :temperature, "", class: "form-control", placeholder: "Para un rango, use dos puntos de separacion (XX:YY)", step: "any"
+					.form-group
+						= label_tag :humidity, "Humedad(máxima): "
+						= text_field_tag :humidity, "", class: "form-control", placeholder: "Para un rango, use dos puntos de separacion (XX:YY)", step: "any"
+					.form-group
+						= label_tag :season, "Estación:"
+						= select_tag :season, options_from_collection_for_select(Season.all, :id, :name), class: "form-control", prompt: " -- Elija una estación -- "
+					.form-group
+						= label_tag :capture_type, "Tipo: "
+						= select_tag :capture_type, options_from_collection_for_select(CaptureType.all, :id, :name), class: "form-control", prompt: " -- Elija un tipo a buscar -- "
+					.form-group
+						= submit_tag "Buscar", class: "form-control"
+			.col-sm-7
+				#map-in-advanced-search
+
+- content_for :ready_scripts do 
+	:javascript
+		$(document).ready(function(){
+			map = new GMaps({
+				div: "#map-in-advanced-search",
+				lat: -0.216667,
+				lng: -78.516667,
+				zoom: 12
+			});
+
+			$("#advanced-search-form input").change(function(){
+				$("#advanced-search-form").submit();
+			});
+		});

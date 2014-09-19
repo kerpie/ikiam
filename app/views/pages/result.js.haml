@@ -1,0 +1,5 @@
+map.removeMarkers();
+- if !@captures.nil? && @captures.count > 0 
+	= render "layouts/add_markers", captures: @captures
+- else
+	alert("No hay resultados");

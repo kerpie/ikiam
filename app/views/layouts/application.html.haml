@@ -1,0 +1,13 @@
+!!!DOCTYPE
+%html
+	%head
+		%title Pokemon
+		= stylesheet_link_tag    "application", media: "all"
+		= csrf_meta_tags
+	%body
+		= render "layouts/navbar"
+		= yield
+		= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false"
+		= javascript_include_tag "https://raw.githubusercontent.com/HPNeo/gmaps/master/gmaps.js"
+		= javascript_include_tag "application"
+		= yield :ready_scripts

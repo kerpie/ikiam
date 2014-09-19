@@ -1,0 +1,15 @@
+.row
+	.col-sm-12
+		#map
+
+- content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			var map = new GMaps({
+				div: "#map",
+				lat: -12.043333,
+				lng: -77.028333
+				}
+			});
+			$("#map").attr("style","width: 100%; height: 100%; display:block;");
+		});

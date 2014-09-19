@@ -1,0 +1,2 @@
+- captures.each do |capture|
+	map.addMarker({lng: #{capture.longitude}, lat: #{capture.latitude}, title: "Descubierto por #{capture.user.safe_name}", infoWindow: { content: "#{j render 'layouts/small_capture', capture: capture}" }});

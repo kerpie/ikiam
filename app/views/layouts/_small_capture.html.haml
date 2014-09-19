@@ -1,0 +1,7 @@
+= link_to capture, target: "_blank" do
+	.panel.panel-default
+		.panel-heading 
+			Descubierto por 
+			= capture.user.safe_name
+		.panel-body
+			= image_tag capture.image.url(:thumb), class: "image-in-map"

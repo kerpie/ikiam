@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  altitude: 1.5
+  latitude: 1.5
+  longitude: 1.5
+  temperature: 1.5
+  description: MyText
+  humidity: 1.5
+  environment_description: MyText
+  time: 2014-09-11 00:57:31
+  user_id: 1
+  season_id: 1
+  region_id: 1
+  capture_type_id: 1
+
+two:
+  altitude: 1.5
+  latitude: 1.5
+  longitude: 1.5
+  temperature: 1.5
+  description: MyText
+  humidity: 1.5
+  environment_description: MyText
+  time: 2014-09-11 00:57:31
+  user_id: 1
+  season_id: 1
+  region_id: 1
+  capture_type_id: 1

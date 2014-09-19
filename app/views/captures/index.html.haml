@@ -1,0 +1,28 @@
+- unless notice.nil? || notice.empty?
+	.alert.alert-success.alert-dismissible{:role => "alert"}
+		%button.close{"data-dismiss" => "alert", :type => "button"}
+			%span{"aria-hidden" => "true"} ×
+			%span.sr-only Cerrar
+		%strong
+			= notice
+- unless alert.nil? || alert.empty?
+	.alert.alert-danger.alert-dismissible{:role => "alert"}
+		%button.close{"data-dismiss" => "alert", :type => "button"}
+			%span{"aria-hidden" => "true"} ×
+			%span.sr-only Cerrar
+		%strong
+			= alert
+
+#map
+
+- content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			map = new GMaps({
+				div: '#map',
+				lat: -0.216667,
+				lng: -78.516667,
+				zoom: 12
+			});
+			#{render "layouts/add_markers", captures: @captures}
+		});

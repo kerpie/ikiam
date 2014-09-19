@@ -1,0 +1,31 @@
+.container-fluid
+  .row
+    .col-sm-12
+      .page-header
+        %h1
+          ¡Bienvenido!
+          %small
+            Es bueno verte de nuevo
+
+  .row
+    .col-sm-6.col-sm-offset-3
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal", role: "form" }) do |f|
+        =custom_devise_error_messages!
+        .form-group
+          = f.label :email, "Correo: ", class: "col-sm-2 control-label"
+          .col-sm-10
+            = f.email_field :email, autofocus: true, class: "form-control"
+        .form-group
+          = f.label :password, "Contraseña: ",class: "col-sm-2 control-label"
+          .col-sm-10
+            = f.password_field :password, autocomplete: "off", class: "form-control"
+        - if devise_mapping.rememberable?
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              .checkbox
+                = f.label :remember_me do
+                  = f.check_box :remember_me
+                  Recordar usuario
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            = f.submit "Iniciar sesión",class: "btn btn-default btn-block"
